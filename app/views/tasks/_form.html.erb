@@ -1,4 +1,4 @@
-<%= form_with(model: task) do |form| %>
+<%= form_with(model: task) do |f| %>
   <% if task.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:</h2>
@@ -11,7 +11,19 @@
     </div>
   <% end %>
 
-  <div class="actions">
-    <%= form.submit %>
+  <div class="actions container">
+    <%= f.label :task_name, "task_name" %>
+    <%= f.text_field :task_name %>
+
+    <br>
+    <%= f.label :task_description, "task_description" %>
+    <%= f.text_field :task_description %>
+
+    <br>
+    <%= f.label :task_priority, "task_priority" %>
+    <%= f.text_field :task_priority %>
+
+    <br>
+    <%= f.submit %>
   </div>
 <% end %>
