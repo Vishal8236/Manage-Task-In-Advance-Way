@@ -1,14 +1,41 @@
-<ul class="nav justify-content-center">
-  <li class="nav-item">
-    <a class="nav-link active" aria-current="page" href="#">Active</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Link</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Link</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-  </li>
-</ul>
+<nav class="navbar navbar-expand-md container">
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+				<% if user_signed_in? %>
+               		<%= link_to "#{current_user.email}", root_path %>
+				<% else %>	
+					<span>Wlcome user in your world :)</span>
+				<% end %>		   
+            </li>
+        </ul>
+    </div>
+    <div class="w-100 order-0 d-lg-none">
+		<div class="d-flex justify-content-between">
+			<div>
+				<span class="text-primary">Vishal </span>
+			</div>
+			<div>
+				<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+			</div>
+		</div>
+    </div>
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        <ul class="navbar-nav ml-auto">
+			<% if user_signed_in? %>
+				<li class="nav-item">
+					<%= link_to "Logout", destroy_user_session_path, class:'nav-link' ,method: :delete%>
+				</li>
+			<% else %>
+				<li class="nav-item">
+					<%= link_to "Signup", new_user_registration_path, class:'nav-link' %>
+				</li>
+				<li class="nav-item">
+					<%= link_to "Login", new_user_session_path, class:'nav-link' %>
+				</li>
+			<% end %>
+        </ul>
+    </div>
+</nav>

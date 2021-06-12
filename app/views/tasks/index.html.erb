@@ -1,25 +1,70 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Tasks</h1>
+<div class="container">
+  <!--render sub navigation bar -->
+  <%= render 'tasks/sub_nav' %>
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTask">
+    Add task
+  </button>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
+  <div id="show-tasks" class="row">
     <% @tasks.each do |task| %>
-      <tr>
-        <td><%= link_to 'Show', task %></td>
-        <td><%= link_to 'Edit', edit_task_path(task) %></td>
-        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <div class="p-4 rounded shadow-lg m-4 col-sm-3 <%= task.task_color %>">
+        <p>Task name - <%= task.task_name %></p>
+        <p>Task name - <%= task.task_description %></p>
+      </div>
     <% end %>
-  </tbody>
-</table>
+  </div>
 
-<br>
+  <!-- Task add Modal -->
+  <div class="modal fade" id="addTask" tabindex="-1" aria-labelledby="addTaskLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <%= form_with url: "/tasks", method: :post, remote: true do |f| %>
+          <div class="modal-body">
+            <div class="container">
+              <div class="mt-2">
+                <%= f.text_field :task_name, placeholder: "Enter task name", class: 'form-control' %>
+              </div>
+              <div class="mt-4">
+                <%= f.text_field :task_description , placeholder: "Enter task Desciption", class: 'form-control' %>
+              </div>
+              <div class="mt-4">
+                <%= f.text_field :task_priority, placeholder: "Enter task priority", class: 'form-control' %>
+              </div>
+              <hr>  
+              <div class="container">
+                <label for="">Select color for task</label>
+                <div class="row " id=show-color"">
+                  <div class="col-1 mr-2 bg-primary rounded-circle p-4 h-75 c-option" onclick="setCheckColor(this ,'bg-primary text-white')"></div>
+                  <div class="col-1 mr-2 bg-warning rounded-circle p-4 h-75 c-option" onclick="setCheckColor(this, 'bg-warning text-white')"></div>
+                  <div class="col-1 mr-2 bg-info rounded-circle p-4 h-50 c-option" onclick="setCheckColor(this, 'bg-info text-white')"></div>
+                  <div class="col-1 mr-2 bg-danger rounded-circle p-4 h-50 c-option" onclick="setCheckColor(this, 'bg-danger text-white')"></div>
 
-<%= link_to 'New Task', new_task_path %>
+                  <div class="col-1 mr-2 first-color rounded-circle p-4 h-50 c-option" onclick="setCheckColor(this, 'first-color text-white')"></div>
+                  <div class="col-1 mr-2 fourth-color rounded-circle p-4 h-50 c-option" onclick="setCheckColor(this, 'fourth-color text-white')"></div>
+                  <div class="col-1 mr-2 third-color rounded-circle p-4 h-50 c-option" onclick="setCheckColor(this, 'third-color text-white')"></div>
+                </div>
+                <div id="select-color">
+                    <%= hidden_field_tag :task_color, "" ,id:'select-c'%>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <%= f.submit "save task", class:'btn btn-primary' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  var get_all_color = document.getElementById('show-color');
+  setCheckColor = (e, get_color) =>{
+    e.classList.toggle('bg-dark')
+    document.getElementById('select-c').value = get_color;
+  }
+</script>
