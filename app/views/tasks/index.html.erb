@@ -3,19 +3,8 @@
 <div class="container">
   <!--render sub navigation bar -->
   <%= render 'tasks/sub_nav' %>
-  <!-- Button trigger modal -->
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTask">
-    Add task
-  </button>
 
-  <div id="show-tasks" class="row">
-    <% @tasks.each do |task| %>
-      <div class="p-4 rounded shadow-lg m-4 col-sm-3 <%= task.task_color %>">
-        <p>Task name - <%= task.task_name %></p>
-        <p>Task name - <%= task.task_description %></p>
-      </div>
-    <% end %>
-  </div>
+  <%= render "tasks/show_tasks" %>
 
   <!-- Task add Modal -->
   <div class="modal fade" id="addTask" tabindex="-1" aria-labelledby="addTaskLabel" aria-hidden="true">
@@ -31,7 +20,14 @@
                 <%= f.text_field :task_description , placeholder: "Enter task Desciption", class: 'form-control' %>
               </div>
               <div class="mt-4">
-                <%= f.text_field :task_priority, placeholder: "Enter task priority", class: 'form-control' %>
+                <div class="row">
+                  <div class="col-sm-6"> 
+                    <%= f.text_field :task_priority, placeholder: "Enter task priority", class: 'form-control' %>
+                  </div>
+                  <div class="col-sm-6"> 
+                    <%= f.select(:task_day, ["Today", "Tomorrow", "Day After Tomorrow"], { selected: "Today" }, {required: 'true', class: 'form-control'})  %>
+                  </div>
+                </div>
               </div>
               <hr>  
               <div class="container">

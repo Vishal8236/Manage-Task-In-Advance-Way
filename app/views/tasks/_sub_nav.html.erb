@@ -1,16 +1,17 @@
-<ul class="nav justify-content-center">
-  <li class="nav-item">
-	<%= fa_icon 'search 2x' %>
-    <a class="nav-link active" aria-current="page" href="#">Active</a>
+<ul class="nav justify-content-around align-items-center">
+  <li class="nav-item d-flex align-items-center ">
+    <a class="nav-link active align-item-center h4 text-secondary" data-bs-toggle="modal" data-bs-target="#addTask" aria-current="page" href="#"><span class="mr-1"><%= fa_icon 'plus 1x' %></span> New Task</a>
+  </li>
+  <li class="nav-item d-flex align-items-center text-secondary h4">
+	<span class="mr-1"><%= fa_icon 'line-chart 1x' %></span>
+	<%= link_to "Activity", root_path ,class:'nav-link h4 mt-1 text-secondary' %>
+  </li>
+  <li class="nav-item d-flex align-items-center text-secondary h4">
+	<span class="mr-1"><%= fa_icon 'user 1x' %></span>
+	<%= link_to "Profile", root_path ,class:'nav-link h4 mt-1 text-secondary' %>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="#">Link</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Link</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+    <input type="text" name="" class="form-control" placeholder="Search Task From Here :)" id="">
   </li>
 </ul>
 <hr class="">

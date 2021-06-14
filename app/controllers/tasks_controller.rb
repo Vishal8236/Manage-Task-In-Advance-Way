@@ -25,7 +25,8 @@ class TasksController < ApplicationController
 
   # POST /tasks or /tasks.json
   def create
-    @task = current_user.tasks.new(task_name: params[:task_name], task_description: params[:task_description], task_priority: params[:task_priority],task_color: params[:task_color])
+    get_day = check_task_day(params[:task_day])
+    @task = current_user.tasks.new(task_name: params[:task_name], task_description: params[:task_description], task_priority: params[:task_priority],task_color: params[:task_color], task_day: get_day )
     if @task.save
       respond_to do |format|
         # format.js { render 'tasks/create' }
@@ -56,6 +57,36 @@ class TasksController < ApplicationController
     end
   end
 
+  def check_task_day(day)
+    if day == "Day After Tomorrow"
+      date = Date.today
+      return (date+2).to_s
+    elsif day == "Tomorrow"
+      date = Date.today
+      return (date+1).to_s
+    else
+      return (Date.today).to_s
+    end
+  end
+  
+  def update_task_status
+    task = Task.find(params[:task_id])
+    if params[:task_status].eql?('1')
+      task.task_status = true
+    else
+      task.task_status = false  
+    end
+    task.save
+  end
+  
+  def filter_task_day
+    get_filter_day = params[:filter_day]
+    @tasks = current_user.tasks.where(task_day: get_filter_day)
+    respond_to do |format|
+      format.js { render 'tasks/task_filter_by_day' }
+    end
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_task

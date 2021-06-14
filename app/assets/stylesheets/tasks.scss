@@ -17,3 +17,22 @@
 .fifth-color{
 	background-color: #09cbcb;
 }
+
+
+//task show page css
+.task-delete-link{
+	border-bottom: 1px solid white;
+}
+.task-delete-link:hover{
+	border-bottom: none;
+}
+
+.task-edit-link{
+	border-bottom: 1px solid white;
+}
+.task-edit-link:hover{
+	border-bottom: none;
+}
+.active{
+	color: #02bcf5;
+}
