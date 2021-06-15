@@ -1,3 +1,5 @@
+<script src="https://code.highcharts.com/highcharts.js"></script>
+
 <div class="container">
 	<!--render sub navigation bar -->
   <%= render 'tasks/sub_nav' %>
@@ -6,28 +8,34 @@
   <%= render partial: 'tasks/new_task_add_modal' %>
 
 	<!-- <div class="h3 text-primary">Welcome in new task managment system.</div> -->
-
 	<div class="container w-100">
 		<div class="shadow col-12 w-100 p-4 rounded">
 			<div class="h2 text-primary">This week analysis 📊 🚀</div>
-			<div class="row">
-				<div class="col-sm-4">
+			<div class="row mt-5">
+				<div class="col-sm-4 text-center">
 					<div>
-						<div>This week Total Tasks:</div>
+						<div>This week Total Tasks</div>
 						<div><%= this_weak_task %></div>
 					</div>
 					<div>
 					</div>
 				</div>
 				<div class="col-sm-4 text-center">
-					<div>Tasks completed:</div>
+					<div>Tasks completed</div>
 					<div><%= task_completed %></div>
 				</div>
 				<div class="col-sm-4 text-center">
-					<div>Tasks uncompleted:</div>
+					<div>Tasks uncompleted</div>
 					<div><%= total_task %></div>
 				</div>
 			</div>
+			<div class="mt-5">
+				<%= line_chart @tasks.group(:task_day).count %>
+				<div class="text-center mt-3 text-secondary h5">Task assign in daily bases</div>
+			</div>
 		</div>
 	</div>
+
+
+
 </div>
