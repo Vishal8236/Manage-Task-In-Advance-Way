@@ -87,6 +87,10 @@ class TasksController < ApplicationController
     end
   end
   
+  def task_activity
+    @tasks = Task.all
+  end
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_task

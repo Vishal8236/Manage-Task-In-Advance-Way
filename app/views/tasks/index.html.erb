@@ -7,55 +7,7 @@
   <%= render "tasks/show_tasks" %>
 
   <!-- Task add Modal -->
-  <div class="modal fade" id="addTask" tabindex="-1" aria-labelledby="addTaskLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <%= form_with url: "/tasks", method: :post, remote: true do |f| %>
-          <div class="modal-body">
-            <div class="container">
-              <div class="mt-2">
-                <%= f.text_field :task_name, placeholder: "Enter task name", class: 'form-control' %>
-              </div>
-              <div class="mt-4">
-                <%= f.text_field :task_description , placeholder: "Enter task Desciption", class: 'form-control' %>
-              </div>
-              <div class="mt-4">
-                <div class="row">
-                  <div class="col-sm-6"> 
-                    <%= f.text_field :task_priority, placeholder: "Enter task priority", class: 'form-control' %>
-                  </div>
-                  <div class="col-sm-6"> 
-                    <%= f.select(:task_day, ["Today", "Tomorrow", "Day After Tomorrow"], { selected: "Today" }, {required: 'true', class: 'form-control'})  %>
-                  </div>
-                </div>
-              </div>
-              <hr>  
-              <div class="container">
-                <label for="">Select color for task</label>
-                <div class="row " id=show-color"">
-                  <div class="col-1 mr-2 bg-primary rounded-circle p-4 h-75 c-option" onclick="setCheckColor(this ,'bg-primary text-white')"></div>
-                  <div class="col-1 mr-2 bg-warning rounded-circle p-4 h-75 c-option" onclick="setCheckColor(this, 'bg-warning text-white')"></div>
-                  <div class="col-1 mr-2 bg-info rounded-circle p-4 h-50 c-option" onclick="setCheckColor(this, 'bg-info text-white')"></div>
-                  <div class="col-1 mr-2 bg-danger rounded-circle p-4 h-50 c-option" onclick="setCheckColor(this, 'bg-danger text-white')"></div>
-
-                  <div class="col-1 mr-2 first-color rounded-circle p-4 h-50 c-option" onclick="setCheckColor(this, 'first-color text-white')"></div>
-                  <div class="col-1 mr-2 fourth-color rounded-circle p-4 h-50 c-option" onclick="setCheckColor(this, 'fourth-color text-white')"></div>
-                  <div class="col-1 mr-2 third-color rounded-circle p-4 h-50 c-option" onclick="setCheckColor(this, 'third-color text-white')"></div>
-                </div>
-                <div id="select-color">
-                    <%= hidden_field_tag :task_color, "" ,id:'select-c'%>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <%= f.submit "save task", class:'btn btn-primary' %>
-          </div>
-        <% end %>
-      </div>
-    </div>
-  </div>
+  <%= render partial: 'tasks/new_task_add_modal' %>
 </div>
 <script>
   var get_all_color = document.getElementById('show-color');
