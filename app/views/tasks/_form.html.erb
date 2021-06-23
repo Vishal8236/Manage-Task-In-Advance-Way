@@ -1,29 +1,59 @@
-<%= form_with(model: task) do |f| %>
-  <% if task.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:</h2>
+<div class="modal fade" id="show-edit-tasks-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <%= form_with(model: @task, remote: true) do |f| %>
+          <% if @task.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
+              <ul>
+                <% @task.errors.each do |error| %>
+                  <li><%= error.full_message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+          <div class="modal-body">
+            <div class="container">
+              <div class="mt-2">
+                <%= f.text_field :task_name, class: 'form-control' %>
+              </div>
+              <div class="mt-4">
+                <%= f.text_area(:task_description, size: '50x10', class: 'form-control') %>
+              </div>
+              <div class="mt-4">
+                <div class="row">
+                  <div class="col-sm-6"> 
+                    <%= f.text_field :task_priority, class: 'form-control' %>
+                  </div>
+                  <div class="col-sm-6"> 
+                    <%= f.select(:task_day, ["Today", "Tomorrow", "Day After Tomorrow"], { selected: @task.task_day }, {required: 'true', class: 'form-control'})  %>
+                  </div>
+                </div>
+              </div>
+              <hr>  
+              <div class="container">
+                <label for="">Select color for task</label>
+                <div class="row " id=show-color"">
+                  <div class="col-1 mr-2 bg-primary rounded-circle p-4 h-75 c-option" onclick="setCheckColor(this ,'bg-primary text-white')"></div>
+                  <div class="col-1 mr-2 bg-warning rounded-circle p-4 h-75 c-option" onclick="setCheckColor(this, 'bg-warning text-white')"></div>
+                  <div class="col-1 mr-2 bg-info rounded-circle p-4 h-50 c-option" onclick="setCheckColor(this, 'bg-info text-white')"></div>
+                  <div class="col-1 mr-2 bg-danger rounded-circle p-4 h-50 c-option" onclick="setCheckColor(this, 'bg-danger text-white')"></div>
 
-      <ul>
-        <% task.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+                  <div class="col-1 mr-2 first-color rounded-circle p-4 h-50 c-option" onclick="setCheckColor(this, 'first-color text-white')"></div>
+                  <div class="col-1 mr-2 fourth-color rounded-circle p-4 h-50 c-option" onclick="setCheckColor(this, 'fourth-color text-white')"></div>
+                  <div class="col-1 mr-2 third-color rounded-circle p-4 h-50 c-option" onclick="setCheckColor(this, 'third-color text-white')"></div>
+                </div>
+                <div id="select-color">
+                    <%= hidden_field_tag :task_color, "" ,id:'select-c'%>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <%= f.submit "update task", class:'btn btn-primary' %>
+          </div>
+      <% end %>
     </div>
-  <% end %>
-
-  <div class="actions container">
-    <%= f.label :task_name, "task_name" %>
-    <%= f.text_field :task_name %>
-
-    <br>
-    <%= f.label :task_description, "task_description" %>
-    <%= f.text_field :task_description %>
-
-    <br>
-    <%= f.label :task_priority, "task_priority" %>
-    <%= f.text_field :task_priority %>
-
-    <br>
-    <%= f.submit %>
   </div>
-<% end %>
+</div>

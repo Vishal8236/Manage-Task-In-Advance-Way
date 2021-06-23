@@ -21,6 +21,9 @@ class TasksController < ApplicationController
 
   # GET /tasks/1/edit
   def edit
+    # respond_to do |format|
+    #   format.js { render  "tasks/edit" }
+    # end
   end
 
   # POST /tasks or /tasks.json
@@ -38,7 +41,7 @@ class TasksController < ApplicationController
   # PATCH/PUT /tasks/1 or /tasks/1.json
   def update
     respond_to do |format|
-      if @task.update(task_params)
+      if @task.update(task_name: params[:task][:task_name], task_description: params[:task][:task_description], task_priority: params[:task][:task_priority], task_day: params[:task][:task_day], task_color: params[:task_color])
         format.html { redirect_to @task, notice: "Task was successfully updated." }
         format.json { render :show, status: :ok, location: @task }
       else
@@ -77,6 +80,11 @@ class TasksController < ApplicationController
       task.task_status = false  
     end
     task.save
+    @tasks = current_user.tasks.all
+    respond_to do |format|
+      # format.html {}
+      format.js { render 'tasks/update_task_status' }
+    end
   end
   
   def filter_task_day
@@ -84,6 +92,15 @@ class TasksController < ApplicationController
     @tasks = current_user.tasks.where(task_day: get_filter_day)
     respond_to do |format|
       format.js { render 'tasks/task_filter_by_day' }
+    end
+  end
+  
+  def task_update
+    @task = current_user.tasks.find(params[:id])
+    task_day = @task.task_day
+    puts task_day
+    respond_to do |format|
+      format.js { render 'tasks/edit' }
     end
   end
   
@@ -95,6 +112,6 @@ class TasksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def task_params
-      params.require(:task).permit(:task_name, :task_description, :task_priority)
+      params.require(:task).permit(:task_name, :task_description, :task_priority, :task_day, :task_color)
     end
 end

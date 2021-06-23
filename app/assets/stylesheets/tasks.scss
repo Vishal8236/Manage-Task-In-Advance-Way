@@ -36,3 +36,38 @@
 .active{
 	color: #02bcf5;
 }
+
+.task-checkbox{
+	padding: 3px;
+	border: 1px solid white;
+}
+.show-task{
+	position: relative;
+	height: 150px;
+	width: 87%;
+}
+.task-done-msg{
+	width: 100%;
+	vertical-align: middle;
+	top: 50%;
+	left: 50%;
+	bottom: 0;
+	right: 0;
+	margin: auto;
+	font-size: 20px;
+	line-height: 28px;
+	position: absolute;
+}
+.task-op{
+	position: absolute;
+	width: 100%;
+	bottom: 0;
+	padding-bottom: 10px;
+}
+.task-detail{
+	overflow:hidden;
+	display:inline-block;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 90%; 
+}

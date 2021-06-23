@@ -1,17 +1,18 @@
 <ul class="nav justify-content-around align-items-center">
+  <li class="nav-item d-flex align-items-center text-secondary h4">
+    <span class="mr-1"><%= fa_icon 'university 1x' %></span>
+    <%= link_to "Dashboard", root_path ,class:'nav-link h4 mt-1 text-secondary' %>
+  </li>
   <li class="nav-item d-flex align-items-center ">
     <a class="nav-link active align-item-center h4 text-secondary" data-bs-toggle="modal" data-bs-target="#addTask" aria-current="page" href="#"><span class="mr-1"><%= fa_icon 'plus 1x' %></span> New Task</a>
   </li>
   <li class="nav-item d-flex align-items-center text-secondary h4">
-	<span class="mr-1"><%= fa_icon 'line-chart 1x' %></span>
-	<%= link_to "Activity", task_activity_path ,class:'nav-link h4 mt-1 text-secondary' %>
+    <span class="mr-1"><%= fa_icon 'line-chart 1x' %></span>
+    <%= link_to "Activity", task_activity_path ,class:'nav-link h4 mt-1 text-secondary' %>
   </li>
   <li class="nav-item d-flex align-items-center text-secondary h4">
-	<span class="mr-1"><%= fa_icon 'user 1x' %></span>
-	<%= link_to "Profile", root_path ,class:'nav-link h4 mt-1 text-secondary' %>
-  </li>
-  <li class="nav-item">
-    <input type="text" name="" class="form-control" placeholder="Search Task From Here :)" id="">
+    <span class="mr-1"><%= fa_icon 'user 1x' %></span>
+    <%= link_to "Profile", root_path ,class:'nav-link h4 mt-1 text-secondary' %>
   </li>
 </ul>
 <hr class="">

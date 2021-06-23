@@ -1,0 +1,11 @@
+@import 'bootstrap/dist/css/bootstrap';
+
+.task-width{
+	width: 100%;
+}
+
+@media screen and (max-width: 479px) {
+    .task-width {
+        width: 130%;
+    }
+}
