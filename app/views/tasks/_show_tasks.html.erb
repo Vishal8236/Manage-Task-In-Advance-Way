@@ -1,4 +1,5 @@
 <%= javascript_pack_tag "show_task" %>
+<%= javascript_pack_tag "task_status_update" %>
 <div id="show-tasks" class="row task-width">
 	<div class="col-10">
 		<div>
@@ -20,15 +21,7 @@
 										<%= link_to "Edit", task_update_path(id: task.id),remote: true ,class:'text-white task-edit-link' %>
 									</div>
 									<div class="col-6 text-right">
-										<%= form_with url: "/update_task_status", local: false, id:"task_status_form_#{task.id}" do |f| %>
-											<% if task.task_status %>
-												<%= f.hidden_field :task_id, value: task.id %>
-												<%= f.check_box :task_status, class: "task-checkbox p-2",  checked: true ,onchange: "track_task_status(#{task.id})" %>
-											<% else %>
-												<%= f.hidden_field :task_id, value: task.id %>
-												<%= f.check_box :task_status, class: "task-checkbox p-2", checked: false,onchange: "track_task_status(#{task.id})" %>
-											<% end %>
-										<%end%>  
+										<input type="checkbox" name="task_status" id="<%= task.id %>" class="t_status" >
 									</div>
 								</div>
 							</div>
@@ -54,15 +47,7 @@
 										<%= link_to "Edit", task_update_path(id: task.id),remote: true ,class:'text-white task-edit-link' %>
 									</div>
 									<div class="col-6 text-right">
-										<%= form_with url: "/update_task_status", local: false, id:"task_status_form_#{task.id}" do |f| %>
-											<% if task.task_status %>
-												<%= f.hidden_field :task_id, value: task.id %>
-												<%= f.check_box :task_status, class: "task-checkbox p-2",  checked: true ,onchange: "track_task_status(#{task.id})" %>
-											<% else %>
-												<%= f.hidden_field :task_id, value: task.id %>
-												<%= f.check_box :task_status, class: "task-checkbox p-2", checked: false ,onchange: "track_task_status(#{task.id})" %>
-											<% end %>
-										<%end%>  
+										<input type="checkbox" name="task_status" id="<%= task.id %>" class="t_status" checked>
 									</div>
 								</div>
 							</div>
@@ -83,9 +68,9 @@
 <div id="show-edit-tasks">
 </div>
 <script>
-	track_task_status = (task_id) =>{
-		document.getElementById(`task_status_form_${task_id}`).submit();
-	}
+	// track_task_status = (task_id) =>{
+	// 	document.getElementById(`task_status_form_${task_id}`).submit();
+	// }
 	var filter_day_op = document.getElementsByClassName("a")
 	
 	change_color = (e) =>{

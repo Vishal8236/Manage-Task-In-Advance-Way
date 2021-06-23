@@ -27,7 +27,10 @@ gem 'jbuilder', '~> 2.7'
 gem 'devise'
 gem "font-awesome-rails"
 
+gem 'jquery-rails'
+
 gem 'chartkick'
+
 gem 'groupdate'
 
 # Reduces boot times through caching; required in config/boot.rb

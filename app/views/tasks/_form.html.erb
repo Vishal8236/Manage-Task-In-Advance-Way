@@ -26,7 +26,7 @@
                     <%= f.text_field :task_priority, class: 'form-control' %>
                   </div>
                   <div class="col-sm-6"> 
-                    <%= f.select(:task_day, ["Today", "Tomorrow", "Day After Tomorrow"], { selected: @task.task_day }, {required: 'true', class: 'form-control'})  %>
+                    <%= f.select(:task_day, ["Today", "Tomorrow", "Day After Tomorrow"], { selected: show_edit_task_day(@task.task_day) }, {required: 'true', class: 'form-control'})  %>
                   </div>
                 </div>
               </div>
@@ -51,7 +51,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <%= f.submit "update task", class:'btn btn-primary' %>
+            <%= f.submit "Update task", class:'btn btn-primary' %>
           </div>
       <% end %>
     </div>

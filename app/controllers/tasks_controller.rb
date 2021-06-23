@@ -40,8 +40,9 @@ class TasksController < ApplicationController
 
   # PATCH/PUT /tasks/1 or /tasks/1.json
   def update
+    get_day = check_task_day(params[:task][:task_day])
     respond_to do |format|
-      if @task.update(task_name: params[:task][:task_name], task_description: params[:task][:task_description], task_priority: params[:task][:task_priority], task_day: params[:task][:task_day], task_color: params[:task_color])
+      if @task.update(task_name: params[:task][:task_name], task_description: params[:task][:task_description], task_priority: params[:task][:task_priority], task_day: get_day, task_color: params[:task_color])
         format.html { redirect_to @task, notice: "Task was successfully updated." }
         format.json { render :show, status: :ok, location: @task }
       else
@@ -73,6 +74,7 @@ class TasksController < ApplicationController
   end
   
   def update_task_status
+    byebug
     task = Task.find(params[:task_id])
     if params[:task_status].eql?('1')
       task.task_status = true
@@ -98,7 +100,6 @@ class TasksController < ApplicationController
   def task_update
     @task = current_user.tasks.find(params[:id])
     task_day = @task.task_day
-    puts task_day
     respond_to do |format|
       format.js { render 'tasks/edit' }
     end

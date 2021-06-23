@@ -11,6 +11,9 @@ import "bootstrap"
 
 import "chartkick/chart.js"
 
+//= require jquery
+//= require jquery-ujs
+
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
