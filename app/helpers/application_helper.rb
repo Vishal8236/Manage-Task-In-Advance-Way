@@ -1,8 +1,22 @@
 module ApplicationHelper
 	def total_task
-		Task.all.count
+		current_user.tasks.all.count
 	end
 
+	# day task analysis
+	def today_task
+		current_user.tasks.where('task_day = ?', (Date.today).to_s ).count
+	end
+	
+	def today_task_uncomplete
+		current_user.tasks.where(["task_day = ? and task_status = ? ", (Date.today).to_s , false]).count
+	end
+
+	def today_task_completed
+		current_user.tasks.where(["task_day = ? and task_status = ? ", (Date.today).to_s , true]).count
+	end
+	
+	# week task analysis
 	def this_weak_task
 		current_user.tasks.where('task_day >= ?', 1.week.ago).count
 	end
@@ -16,7 +30,6 @@ module ApplicationHelper
 	end
 
 	def show_edit_task_day(day_date)
-		# byebug
 		date = Date.today
 		if day_date == date.to_s
 			return "Today"
@@ -24,7 +37,6 @@ module ApplicationHelper
 			return "Tomorrow"
 		elsif day_date == (date+2).to_s
 			return "Day After Tomorrow"
-	
 		end
 	end
 	

@@ -1,8 +1,7 @@
 $(document).ready(function () {
-	$(".t_status").bind('change', function(){
-		if (this.checked){
-			let task_id = $(this).attr('id')
-			console.log(task_id)
+	update_task_s = (e) => {
+		if (e.checked){
+			let task_id = $(e).attr('id')
 			jQuery.ajax({
 				type: 'get',
 				url: '/update_task_status',
@@ -10,13 +9,12 @@ $(document).ready(function () {
 			});
 		}
 		else {
-			let task_id = $(this).attr('id')
-			console.log(task_id)
+			let task_id = $(e).attr('id')
 			jQuery.ajax({
 				type: 'get',
 				url: '/update_task_status',
 				data: {"task_status": 0,"task_id": task_id}
 			});
 		}
-	});
+	}
 });

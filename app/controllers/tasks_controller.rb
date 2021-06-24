@@ -4,7 +4,8 @@ class TasksController < ApplicationController
 
   # GET /tasks or /tasks.json
   def index
-    @tasks = current_user.tasks.all
+    date = (Date.today).to_s
+    @tasks = current_user.tasks.where(task_day: date)
   end
 
   # GET /tasks/1 or /tasks/1.json
@@ -74,7 +75,6 @@ class TasksController < ApplicationController
   end
   
   def update_task_status
-    byebug
     task = Task.find(params[:task_id])
     if params[:task_status].eql?('1')
       task.task_status = true
@@ -82,7 +82,8 @@ class TasksController < ApplicationController
       task.task_status = false  
     end
     task.save
-    @tasks = current_user.tasks.all
+    date = (Date.today).to_s
+    @tasks = current_user.tasks.where(task_day: date)
     respond_to do |format|
       # format.html {}
       format.js { render 'tasks/update_task_status' }

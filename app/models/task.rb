@@ -1,11 +1,8 @@
 class Task < ApplicationRecord
 	belongs_to :user
 
-	def self.get_all_filter_tasks
-		Task.all.each do |task|
-			task
-		end
-	end
-	
+	attribute :task_color, :string, default: 'bg-primary text-white'
+	attribute :task_status, :boolean, default: false
+
 end
 

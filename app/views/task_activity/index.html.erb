@@ -9,33 +9,52 @@
 
 	<!-- <div class="h3 text-primary">Welcome in new task managment system.</div> -->
 	<div class="container w-100">
-		<div class="shadow col-12 w-100 p-4 rounded">
+		<div class="shadow col-12 w-100 p-4 rounded ">
+			<div class="h2 text-primary">Today Task 📊 🚀</div>
+			<div class="row mt-5">
+				<div class="col-sm-4 text-center">
+					<div class="h5">
+						<div>Today all task</div>
+						<div class="mt-2"><%= today_task %></div>
+					</div>
+					<div>
+					</div>
+				</div>
+				<div class="col-sm-4 text-center h5">
+					<div>Tasks completed</div>
+					<div class="mt-2"><%= today_task_completed %></div>
+				</div>
+				<div class="col-sm-4 text-center h5">
+					<div>Tasks uncompleted</div>
+					<div class="mt-2"><%= today_task_uncomplete %></div>
+				</div>
+			</div>
+		</div>
+
+		<div class="shadow col-12 w-100 p-4 rounded mt-5 mb-3">
 			<div class="h2 text-primary">This week analysis 📊 🚀</div>
 			<div class="row mt-5">
 				<div class="col-sm-4 text-center">
-					<div>
-						<div>This week Total Tasks</div>
-						<div><%= this_weak_task %></div>
+					<div class="h5">
+						<div>This week Tasks</div>
+						<div class="mt-2"><%= this_weak_task %></div>
 					</div>
 					<div>
 					</div>
 				</div>
-				<div class="col-sm-4 text-center">
+				<div class="col-sm-4 text-center h5">
 					<div>Tasks completed</div>
-					<div><%= task_completed %></div>
+					<div class="mt-2"><%= task_completed %></div>
 				</div>
-				<div class="col-sm-4 text-center">
+				<div class="col-sm-4 text-center h5">
 					<div>Tasks uncompleted</div>
-					<div><%= total_task %></div>
+					<div class="mt-2"><%= task_uncomplete %></div>
 				</div>
 			</div>
 			<div class="mt-5">
-				<%= line_chart @tasks.group(:task_day).count %>
+				<%= line_chart @tasks.group_by_day_of_week(:task_day,format: "%a").count %>
 				<div class="text-center mt-3 text-secondary h5">Task assign in daily bases</div>
 			</div>
 		</div>
 	</div>
-
-
-
 </div>

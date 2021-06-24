@@ -1,11 +1,14 @@
 <p id="notice"><%= notice %></p>
+<%= javascript_pack_tag "show_task" %>
+<%= javascript_pack_tag "task_status_update" %>
 
 <div class="container">
   <!--render sub navigation bar -->
   <%= render 'tasks/sub_nav' %>
 
-  <%= render "tasks/show_tasks" %>
-
+  <div id="show-tasks">
+    <%= render "tasks/show_tasks" %>
+  </div>
   <!-- Task add Modal -->
   <%= render partial: 'tasks/new_task_add_modal' %>
   
