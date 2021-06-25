@@ -10,8 +10,8 @@
 						<% @tasks.each do |task| %>
 							<% if !task.task_status? %>
 								<div class="show-task p-3 rounded shadow-lg m-4 col-sm-5 <%= task.task_color %>">
-									<div class="">
-										<span class="task-detail h3"><%= task.task_name %></span>
+									<div class="task-title cursor-pointer" id="<%=task.id%>" onclick="show_task_details(this)">
+										<span class="task-detail h3 "><%= task.task_name %></span>
 										<p class="task-detail"><%= task.task_description %></p>
 									</div>
 									<div class="row border-top pt-2 d-flex task-op">
@@ -37,7 +37,7 @@
 						<% @tasks.each do |task| %>
 							<% if task.task_status? %>
 								<div class="show-task p-3 rounded shadow-lg m-4 col-sm-5 <%= task.task_color %>">
-									<div class="">
+									<div class="task-title cursor-pointer" id="<%=task.id%>" onclick="show_task_details(this)">
 										<span class="task-detail h3"><%= task.task_name %></span>
 										<p class="task-detail"><%= task.task_description %></p>
 									</div>
@@ -69,4 +69,6 @@
 	</div>
 </div>
 <div id="show-edit-tasks">
+</div>
+<div id="show-task-details">
 </div>
