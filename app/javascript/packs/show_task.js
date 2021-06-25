@@ -1,10 +1,4 @@
 $(document).ready(function () {
-	$('#day-filter > div > a').click(function (e) {
-		console.log("hello in show tassasassk")
-		$('#day-filter > div > a').removeClass('text-primary');
-		$(this).addClass('text-primary');
-	});
-
 	show_task_details = (e) =>{
 		let task_id = $(e).attr('id')
 		jQuery.ajax({
@@ -14,5 +8,14 @@ $(document).ready(function () {
 		});
 	}
 
+	change_color = (e) =>{
+		$(".filter-day").each(function(){
+			// Test if the div element is empty
+			$(this).removeClass("text-primary");
+			$(this).addClass("text-secondary");
+		});
+		$(e).removeClass("text-secondary");
+		$(e).addClass("text-primary");
+	}
 	
 });
