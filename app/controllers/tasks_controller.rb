@@ -43,22 +43,22 @@ class TasksController < ApplicationController
   def update
     get_day = check_task_day(params[:task][:task_day])
     respond_to do |format|
-      if @task.update(task_name: params[:task][:task_name], task_description: params[:task][:task_description], task_priority: params[:task][:task_priority], task_day: get_day, task_color: params[:task_color])
-        format.html { redirect_to @task, notice: "Task was successfully updated." }
-        format.json { render :show, status: :ok, location: @task }
+      if @task.update(task_name: params[:task][:task_name], task_description: params[:task][:task_description], task_priority: params[:task][:task_priority], task_day: get_day, task_color: params[:task_color] )
+        @tasks = current_user.tasks.where(task_day: get_day)
+        format.js { render 'tasks/task_update' }
       else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @task.errors, status: :unprocessable_entity }
+        redirect_to root_path
       end
     end
   end
 
   # DELETE /tasks/1 or /tasks/1.json
   def destroy
+    task_day = current_user.tasks.find(params[:id]).task_day
+    @tasks = current_user.tasks.where(task_day: task_day)
     @task.destroy
     respond_to do |format|
-      format.html { redirect_to tasks_url, notice: "Task was successfully destroyed." }
-      format.json { head :no_content }
+      format.js { render 'tasks/task_update' }
     end
   end
 
